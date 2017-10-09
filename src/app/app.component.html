@@ -1,0 +1,17 @@
+<h1> {{ title }} </h1>
+
+<kendo-chart [categoryAxis]="{ categories: timestamps }">
+  <kendo-chart-title text="Ambient Sensor Data"></kendo-chart-title>
+  <kendo-chart-legend 
+    position="bottom" orientation="horizontal"
+  ></kendo-chart-legend>
+  <kendo-chart-series>
+    <kendo-chart-series-item
+      *ngFor="let item of series"
+      type="area"
+      opacity="0.5"
+      [data]="item.data"
+      [name]="item.name"
+    ></kendo-chart-series-item>
+  </kendo-chart-series>
+</kendo-chart>

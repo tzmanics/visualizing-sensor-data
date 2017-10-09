@@ -1,1 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@progress/kendo-theme-default/scss/all";
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+
+html {
+  font-family: 'Oswald', sans-serif;
+}
