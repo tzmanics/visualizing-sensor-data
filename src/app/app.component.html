@@ -1,17 +1,26 @@
 <h1> {{ title }} </h1>
 
-<kendo-chart [categoryAxis]="{ categories: timestamps }">
+<kendo-chart [transitions]="false" [categoryAxis]="{ labels: { rotation: -90 } }">
   <kendo-chart-title text="Ambient Sensor Data"></kendo-chart-title>
   <kendo-chart-legend 
     position="bottom" orientation="horizontal"
   ></kendo-chart-legend>
   <kendo-chart-series>
     <kendo-chart-series-item
-      *ngFor="let item of series"
+      [data]="lightSensorData | async"
+      field="data"
+      categroyField="time"
+      name="Light Data"
       type="area"
-      opacity="0.5"
-      [data]="item.data"
-      [name]="item.name"
+      opacity=0.5
+    ></kendo-chart-series-item>
+    <kendo-chart-series-item
+      [data]="soundSensorData | async"
+      field="data"
+      categroyField="time"
+      name="Sound Data"
+      type="area"
+      opacity=0.5
     ></kendo-chart-series-item>
   </kendo-chart-series>
 </kendo-chart>

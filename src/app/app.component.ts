@@ -1,18 +1,23 @@
 import { Component } from '@angular/core';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Visualizing Sensor Data';
-  private timestamps: number[]= [1507498189484, 1507498129444, 1507498159454,
-    1507498189484, 1507498219514];
-  private series: any[] = [{
-    name: 'light', 
-    data: [1.06, 1.46, 0.88, 1.27, 1.17]
-  }, { 
-    name: 'sound',
-    data: [1.76, 1.66, 1.56, 1.55, 1.46]
-  }];
-}
+  private title = 'Visualizing Sensor Data';
+  private lightSensorDataRef: AngularFireList<any>;
+  private lightSensorData: Observable<any[]>;
+  private soundSensorDataRef: AngularFireList<any>;
+  private soundSensorData: Observable<any[]>;
+  
+  constructor(db: AngularFireDatabase) {
+    this.lightSensorDataRef = db.list('sensor-data/ambience/lightSensor');
+    this.lightSensorData = this.lightSensorDataRef.valueChanges();
+    this.soundSensorDataRef = db.list('sensor-data/ambience/soundSensor');
+    this.soundSensorData = this.soundSensorDataRef.valueChanges();
+  }; 
+};
